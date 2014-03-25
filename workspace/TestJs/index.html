@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="ISO-8859-1">
+		<title>Teste - Js</title>
+		
+		<!-- <script src="script/Mamifero.js"></script>
+		<script src="script/Cachorro.js"></script>
+		<script src="script/Gato.js"></script>
+		<script>
+			//alert("Teste!");
+			
+			var gato = new Gato();
+			gato.setPeso(10);
+			
+			alert(gato.getPeso());
+			
+			alert(gato.agir());
+		</script> -->
+	</head>
+	<body>
+		<script src="../VisEdu-CG/cg/js/build/three.min.js"></script>
+		<script src="../VisEdu-CG/cg/js/cg/frameworks/ui/UI.js"></script>
+		<script src="../VisEdu-CG/cg/js/cg/frameworks/ui/UI.three.js"></script>
+		<script src="../VisEdu-CG/cg/js/cg/frameworks/ui/UI.cg.js"></script>
+		<script src="script/PainelPrincipal.js"></script>
+		<script>
+/* 			painel = new PainelPrincipal();			
+			
+			painel.setLeft( '40%' );			
+			painel.setTop( 'calc(50% + ' + 14 +' + 6px)' );
+			painel.setRight( '0px' );					
+			painel.setBottom( '0px' );
+			document.body.appendChild(painel.dom);
+			
+			painel.criarObjGrafico();			       
+	
+			var render = function () {
+				requestAnimationFrame(render);
+	
+				painel.renderizar();
+			};
+	
+			render(); */
+			
+			var scene = new THREE.Scene();
+			var camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+
+			var renderer = new THREE.WebGLRenderer();
+			renderer.setSize(window.innerWidth, window.innerHeight);
+			document.body.appendChild(renderer.domElement);
+
+			var geometry = new THREE.CubeGeometry(1,1,1);
+			var material = new THREE.MeshBasicMaterial({color: 0x00ff00});
+			var cube = new THREE.Mesh(geometry, material);
+			scene.add(cube);
+			
+			var lineGeom = new THREE.Geometry();
+			lineGeom.vertices.push( new THREE.Vector3(-2,-2,0) );
+			lineGeom.vertices.push( new THREE.Vector3(2,-2,0) );
+			lineGeom.vertices.push( new THREE.Vector3(0,2,0) );
+			lineGeom.vertices.push( new THREE.Vector3(-2,-2,0) );
+			lineGeom.colors.push( new THREE.Color(0xff0000) );
+			lineGeom.colors.push( new THREE.Color(0x00ff00) );
+			lineGeom.colors.push( new THREE.Color(0x0000ff) );
+			lineGeom.colors.push( new THREE.Color(0xff0000) );
+			
+			var lineMat = new THREE.LineBasicMaterial({
+			    linewidth: 3,
+			    vertexColors: true
+			});
+			
+			//var triangle = new THREE.Line( lineGeom, lineMat );
+			var triangle = new THREE.Mesh( lineGeom, lineMat );
+			scene.add(triangle);  // scene is of type THREE.Scene
+
+			camera.position.z = 5;
+
+			var render = function () {
+				requestAnimationFrame(render);
+
+				//cube.rotation.x += 0.1;
+				//cube.rotation.y += 0.1;
+
+				renderer.render(scene, camera);
+			};
+
+			render();			
+		</script>			
+	</body>
+</html>
